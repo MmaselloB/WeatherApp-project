@@ -1,3 +1,33 @@
+.body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.application {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.codeLink {
+  margin: 0 auto;
+  padding: 0px;
+}
 h1 {
-  color: blue;
+  color: black;
+  font-size: 25px;
+  font-weight: 500;
+  text-align: left;
+  line-height: 28px;
+  margin-bottom: 0px;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+  color: #70757a;
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 18px;
 }
