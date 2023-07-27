@@ -39,8 +39,8 @@ function showTemperature(response) {
     "src",
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
+  weatherIcon.setAttribute("alt", response.data.condition.description);
 }
-weatherIcon.setAttribute("alt", response.data.condition.description);
 
 let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
 let city = "Pretoria";
