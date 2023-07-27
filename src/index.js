@@ -22,6 +22,7 @@ function formatDate() {
 }
 
 function showTemperature(response) {
+  console.log(response);
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let humidityElement = document.querySelector("#humidity");
@@ -34,10 +35,15 @@ function showTemperature(response) {
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   let currentDate = document.querySelector("#date");
   currentDate.innerHTML = formatDate(response.data.temperature.time * 1000);
+  let weatherIcon = document.querySelector("#imgIcon");
+  weatherIcon.setAttribute(
+    "src",
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
+  );
 }
 
 let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
-let city = "Pretoria"
+let city = "Lisbon";
 let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=29be3da14fc4c0f2dtc483179d3f7o00&units=metric`;
 
 axios.get(apiUrl).then(showTemperature);
