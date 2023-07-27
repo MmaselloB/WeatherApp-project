@@ -37,6 +37,7 @@ function showTemperature(response) {
 }
 
 let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=Pretoria&key=29be3da14fc4c0f2dtc483179d3f7o00&units=metric`;
+let city = "Pretoria"
+let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=29be3da14fc4c0f2dtc483179d3f7o00&units=metric`;
 
 axios.get(apiUrl).then(showTemperature);
