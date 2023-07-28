@@ -42,8 +42,17 @@ function showTemperature(response) {
   weatherIcon.setAttribute("alt", response.data.condition.description);
 }
 
-let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
-let city = "Pretoria";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=29be3da14fc4c0f2dtc483179d3f7o00&units=metric`;
+function DisplayCity(event) {
+  event.preventDefault();
+  let citySearch = document.querySelector("#city-input");
+  search(citySearch.value);
+}
+function search(city) {
+  let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(showTemperature);
+  axios.get(apiUrl).then(showTemperature);
+}
+search("Pretoria");
+let form = document.querySelector("#search-bar");
+form.addEventListener("submit", DisplayCity);
