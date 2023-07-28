@@ -20,7 +20,6 @@ li {
   font-size: 14px;
   font-weight: 100;
   line-height: 18px;
-  
 }
 li::first-letter {
   text-transform: capitalize;
@@ -57,4 +56,15 @@ li::first-letter {
   position: relative;
   font-size: 16px;
   top: -34px;
+}
+.weather-temperature .active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
+.weather-temperature .active:hover {
+  text-decoration: none;
+}
+.weather-temperature .fLink {
+  text-decoration: none;
 }

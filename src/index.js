@@ -22,18 +22,26 @@ function formatDate() {
 }
 
 function showTemperature(response) {
+  celsuisTemperature = response.data.temperature.current;
+
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
+
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.temperature.humidity;
+
   let description = document.querySelector("#condition");
   description.innerHTML = response.data.condition.description;
+
   let location = document.querySelector("#city");
   location.innerHTML = response.data.city;
+
   let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(response.data.temperature.current);
+  temperatureElement.innerHTML = Math.round(celsuisTemperature);
+
   let currentDate = document.querySelector("#date");
   currentDate.innerHTML = formatDate(response.data.temperature.time * 1000);
+
   let weatherIcon = document.querySelector("#imgIcon");
   weatherIcon.setAttribute(
     "src",
@@ -53,6 +61,32 @@ function search(city) {
 
   axios.get(apiUrl).then(showTemperature);
 }
-search("Pretoria");
+
+function showFahernheit(event) {
+  event.preventDefault();
+  celsuisLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemp = (celsuisTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
+function showCelsuis(event) {
+  event.preventDefault();
+  celsuisLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsuisTemperature);
+}
+let celsuisTemperature = null;
+
 let form = document.querySelector("#search-bar");
 form.addEventListener("submit", DisplayCity);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahernheit);
+
+let celsuisLink = document.querySelector("#celsuis-link");
+celsuisLink.addEventListener("click", showCelsuis);
+
+search("Pretoria");
