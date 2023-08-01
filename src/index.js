@@ -20,8 +20,35 @@ function formatDate() {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+function displayForecast() {
+  let forecastElement = document.querySelector("#weatherForecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+                <div class="forecastDay">${day}</div>
 
+                <img
+                  src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
+                  alt=""
+                  width="42"
+                />
+                <div class="weather-forecast-temp">
+                  <span class="weather-forecast-max">30°</span>|<span
+                    class="weather-forecast-min"
+                    >10°</span
+                  >
+                </div>
+              </div>
+      `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 function showTemperature(response) {
+  console.log(response);
   celsuisTemperature = response.data.temperature.current;
 
   let windElement = document.querySelector("#wind");
@@ -90,3 +117,4 @@ let celsuisLink = document.querySelector("#celsuis-link");
 celsuisLink.addEventListener("click", showCelsuis);
 
 search("Pretoria");
+displayForecast();
