@@ -68,3 +68,23 @@ li::first-letter {
 .weather-temperature .fLink {
   text-decoration: none;
 }
+.weather-forecast {
+  margin-top: 20px;
+  text-align: center;
+}
+.forecastDay {
+  font-size: 16px;
+  color: black;
+}
+.weather-forecast-temp {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 15px;
+}
+.weather-forecast-max {
+  color: black;
+}
+.weather-forecast-min {
+  color: #70757a;
+  opacity: 0.7;
+}
