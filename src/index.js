@@ -20,27 +20,37 @@ function formatDate() {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
-function displayForecast() {
-
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+function displayForecast(response) {
+  let dailyForecast = response.data.daily;
 
   let forecastElement = document.querySelector("#weatherForecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
+
+  dailyForecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `<div class="col-2">
-                <div class="forecastDay">${day}</div>
+                <div class="forecastDay">${formatDay(forecastDay.daily)}</div>
 
                 <img
-                  src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
+                  src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                    forecastDay.condition.icon
+                  }.png"
                   alt=""
                   width="42"
                 />
                 <div class="weather-forecast-temp">
-                  <span class="weather-forecast-max">30°</span>|<span
+                  <span class="weather-forecast-max">${
+                    Math.round(forecastDay.temperature.maximum)
+                  }</span>|<span
                     class="weather-forecast-min"
-                    >10°</span
+                    >${Math.round(forecastDay.temperature.minimum)}</span
                   >
                 </div>
               </div>
@@ -52,10 +62,9 @@ function displayForecast() {
 function getForecast(coords) {
   console.log(coords);
   let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
-  let apiURL = `https://api.shecodes.io/weather/v1/current?lon=${coords.lon}&lat=${coords.lat}&key=${apiKey}`;
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lat=${coords.latitude}&lon=${coords.longitude}&key=${apiKey}&units=metric`;
   console.log(apiURL);
   axios.get(apiURL).then(displayForecast);
-  
 }
 function showTemperature(response) {
   getForecast(response.data.coordinates);
@@ -128,4 +137,3 @@ let celsuisLink = document.querySelector("#celsuis-link");
 celsuisLink.addEventListener("click", showCelsuis);
 
 search("Pretoria");
-displayForecast();
