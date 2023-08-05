@@ -1,6 +1,8 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+  margin-top: 120px;
+  margin-bottom: 10px;
   background-image: url(https://s3.amazonaws.com/shecodesio-production/uploads/files/000/092/288/original/clear_skies.jpg?1691265006);
 }
 
