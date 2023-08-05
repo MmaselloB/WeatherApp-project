@@ -3,9 +3,21 @@ body {
   box-sizing: border-box;
   margin-top: 120px;
   margin-bottom: 10px;
+
   background-image: url(https://s3.amazonaws.com/shecodesio-production/uploads/files/000/092/288/original/clear_skies.jpg?1691265006);
 }
-
+label {
+  display: inline
+}
+input {
+  display: inline-flex;
+  margin-bottom: 5px;
+  width: 100%;
+  
+}
+button {
+  display: inline;
+}
 h1 {
   color: black;
   font-size: 25px;
@@ -36,6 +48,7 @@ li::first-letter {
   padding: 20px;
   border: 1px solid grey;
   border-radius: 10px;
+  border-color: whitesmoke;
   box-shadow: 10px 5px 5px #1e549f;
   background-color: whitesmoke;
 }
