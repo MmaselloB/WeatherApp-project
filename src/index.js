@@ -70,14 +70,10 @@ function getForecast(coords) {
 }
 
 function showTemperature(response) {
-  
-
-  getForecast(response.data.coordinates);
-  
   celsuisTemperature = response.data.temperature.current;
-  
-   let temperatureElement = document.querySelector("#temperature");
-   temperatureElement.innerHTML = Math.round(celsuisTemperature);
+
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsuisTemperature);
 
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
@@ -91,8 +87,6 @@ function showTemperature(response) {
   let location = document.querySelector("#city");
   location.innerHTML = response.data.city;
 
- 
-
   let currentDate = document.querySelector("#date");
   currentDate.innerHTML = formatDate(response.data.temperature.time * 1000);
 
@@ -102,6 +96,8 @@ function showTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   weatherIcon.setAttribute("alt", response.data.condition.description);
+
+  getForecast(response.data.coordinates);
 }
 
 function DisplayCity(event) {
@@ -115,7 +111,6 @@ function search(city) {
 
   axios.get(apiUrl).then(showTemperature);
 }
-
 
 function showFahernheit(event) {
   event.preventDefault();
@@ -135,28 +130,26 @@ function showCelsuis(event) {
 }
 
 function showLocation(position) {
-
   let apiKey = "29be3da14fc4c0f2dtc483179d3f7o00";
-  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&key=${apiKey}&units=metric`;
+  let apiURL = `https://api.shecodes.io/weather/v1/current?lat=${position.coords.latitude}&lon=${position.coords.longitude}&key=${apiKey}&units=metric`;
   axios.get(`${apiURL}&appid=${apiKey}`).then(showTemperature);
-  
 }
 function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(showLocation);
 }
- let celsuisTemperature = null;
+let celsuisTemperature = null;
 
-  let currentTemp = document.querySelector("#currentButton");
-  currentTemp.addEventListener("click", getCurrentLocation);
+let currentTemp = document.querySelector("#currentButton");
+currentTemp.addEventListener("click", getCurrentLocation);
 
-  let form = document.querySelector("#search-bar");
-  form.addEventListener("submit", DisplayCity);
+let form = document.querySelector("#search-bar");
+form.addEventListener("submit", DisplayCity);
 
-  let fahrenheitLink = document.querySelector("#fahrenheit-link");
-  fahrenheitLink.addEventListener("click", showFahernheit);
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahernheit);
 
-  let celsuisLink = document.querySelector("#celsuis-link");
-  celsuisLink.addEventListener("click", showCelsuis);
+let celsuisLink = document.querySelector("#celsuis-link");
+celsuisLink.addEventListener("click", showCelsuis);
 
-  search("Pretoria");
+search("Pretoria");
